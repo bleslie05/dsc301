@@ -8,6 +8,8 @@
 !*.pdf
 !*.html
 !*.qmd
+!*.db
+!*.png
 
 # Allow folder structure
 !*/
