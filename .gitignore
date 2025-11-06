@@ -1,9 +1,14 @@
+# Ignore everything
 *
+
+# Keep this file
 !.gitignore
-!.png
-!.pdf
-!.sql
-!.db
-!.html
+
+# Keep only these file types
+!*.pdf
+!*.html
+!*.qmd
+
+# Allow folder structure
 !*/
 

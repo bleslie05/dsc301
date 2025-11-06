@@ -1,0 +1,315 @@
+<html>
+<head>
+<style>
+body {background-color: powderblue;}
+h1   {color: blue;}
+h2   {color: red;}
+p    {color: green;}
+li    {color: orange;}
+
+img  { width: 500px; }
+</style>
+</head>
+<body>
+<h1>Assignment 12</h1>
+
+<h2>Step 1</h2>
+<p>Below is what I learned.</p>
+<ul>
+  <li>You can manipulate values to get other important information (such as averages)</li>
+  <li>You can create html documents inside a linux based terminal.</li>
+  <li>Actions made in temrinal CANOT be undone, if there is no backup.</li>
+</ul>
+
+<h2>Step 14 - Image & Desc.</h2>
+
+        <img src="hw12step14.png" alt ="This is a table of the average book ratings by year.">
+
+
+
+
+<img src="dsc301_hw12_step5.png" alt="This image is a table of all the Book Names, year, book_id, and ratings.">
+<h2>Step 2</h2>
+
+<p>I learned the following.</p>
+
+<ol>
+  <li>first this</li>
+  <li>then that</li>
+  <li>finally</li>
+</ol>
+
+<img src="name_of_second_image.png" alt="description of second image" width="500">
+<h2>Turn on the light</h2>
+<img id="myImage" onclick="changeImage()" src="https://www.w3schools.com/js/pic_bulboff.gif" style="width:100px;height:180px;">
+<p>Turn on the light if this exercise made you bright.</p>
+<script>
+function changeImage() {
+  var image = document.getElementById('myImage');
+  if (image.src.match("bulbon")) {
+    image.src = "https://www.w3schools.com/js/pic_bulboff.gif";
+  } else {
+    image.src = "https://www.w3schools.com/js/pic_bulbon.gif";
+  }
+}
+</script>
+<div id="allSampleContent" class="p-4 w-full">
+<script src="https://cdn.jsdelivr.net/npm/create-gojs-kit@3.0.19/dist/extensions/Figures.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/create-gojs-kit@3.0.19/dist/extensions/Themes.js"></script>
+<script id="code">
+  function init() {
+    myDiagram = new go.Diagram('myDiagramDiv', {
+      allowDelete: false,
+      allowCopy: false,
+      layout: new go.ForceDirectedLayout({ isInitial: false }),
+      'undoManager.isEnabled': true,
+      // use "Modern" themes from extensions/Themes
+      'themeManager.themeMap': new go.Map([
+        { key: 'light', value: Modern },
+        { key: 'dark', value: ModernDark }
+      ]),
+      'themeManager.changesDivBackground': true,
+      'themeManager.currentTheme': document.getElementById('theme').value
+    });
+
+    myDiagram.themeManager.set('light', {
+      colors: {
+        primary: '#f7f9fc',
+        green: '#62bd8e',
+        blue: '#3999bf',
+        purple: '#7f36b0',
+        red: '#c41000'
+      }
+    });
+    myDiagram.themeManager.set('dark', {
+      colors: {
+        primary: '#4a4a4a',
+        green: '#429e6f',
+        blue: '#3f9fc6',
+        purple: '#9951c9',
+        red: '#ff4d3d'
+      }
+    });
+
+    // the template for each attribute in a node's array of item data
+    const itemTempl = new go.Panel('Horizontal', { margin: new go.Margin(2, 0) })
+      .add(
+        new go.Shape({
+          desiredSize: new go.Size(15, 15),
+          strokeWidth: 0,
+          margin: new go.Margin(0, 5, 0, 0)
+        })
+          .bind('figure')
+          .themeData('fill', 'color'),
+        new go.TextBlock({
+          font: '14px sans-serif',
+          stroke: 'black'
+        })
+          .bind('text', 'name')
+          .bind('font', 'iskey', (k) => (k ? 'italic 14px sans-serif' : '14px sans-serif'))
+          .theme('stroke', 'text')
+      );
+
+    // define the Node template, representing an entity
+    myDiagram.nodeTemplate = new go.Node('Auto', { // the whole node panel
+      selectionAdorned: true,
+      resizable: true,
+      layoutConditions: go.LayoutConditions.Standard & ~go.LayoutConditions.NodeSized,
+      fromSpot: go.Spot.LeftRightSides,
+      toSpot: go.Spot.LeftRightSides
+    })
+      .bindTwoWay('location')
+      // whenever the PanelExpanderButton changes the visible property of the "LIST" panel,
+      // clear out any desiredSize set by the ResizingTool.
+      .bindObject('desiredSize', 'visible', (v) => new go.Size(NaN, NaN), undefined, 'LIST')
+      .add(
+        // define the node's outer shape, which will surround the Table
+        new go.Shape('RoundedRectangle', {
+          stroke: '#e8f1ff',
+          strokeWidth: 3
+        })
+          .theme('fill', 'primary'),
+        new go.Panel('Table', {
+          margin: 8,
+          stretch: go.Stretch.Fill
+        })
+          .addRowDefinition(0, { sizing: go.Sizing.None })
+          .add(
+            // the table header
+            new go.TextBlock({
+              row: 0,
+              alignment: go.Spot.Center,
+              margin: new go.Margin(0, 24, 0, 2), // leave room for Button
+              font: 'bold 18px sans-serif'
+            })
+              .bind('text', 'key')
+              .theme('stroke', 'text'),
+            // the collapse/expand button
+            go.GraphObject.build('PanelExpanderButton', {
+              row: 0,
+              alignment: go.Spot.TopRight
+            },'LIST') // the name of the element whose visibility this button toggles
+              .theme('ButtonIcon.stroke', 'text'),
+            new go.Panel('Table', {
+              name: 'LIST',
+              row: 1,
+              alignment: go.Spot.TopLeft
+            })
+              .add(
+                new go.TextBlock('Attributes', {
+                  row: 0,
+                  alignment: go.Spot.Left,
+                  margin: new go.Margin(3, 24, 3, 2),
+                  font: 'bold 15px sans-serif'
+                })
+                  .theme('stroke', 'text'),
+                go.GraphObject.build('PanelExpanderButton', {
+                  row: 0,
+                  alignment: go.Spot.Right
+                }, 'NonInherited')
+                  .theme('ButtonIcon.stroke', 'text'),
+                new go.Panel('Vertical', {
+                  row: 1,
+                  name: 'NonInherited',
+                  alignment: go.Spot.TopLeft,
+                  defaultAlignment: go.Spot.Left,
+                  itemTemplate: itemTempl
+                })
+                  .bind('itemArray', 'items'),
+                new go.TextBlock('Inherited Attributes', {
+                  row: 2,
+                  alignment: go.Spot.Left,
+                  margin: new go.Margin(3, 24, 3, 2), // leave room for Button
+                  font: 'bold 15px sans-serif'
+                })
+                  .bind('visible', 'inheritedItems', (arr) => Array.isArray(arr) && arr.length > 0)
+                  .theme('stroke', 'text'),
+                go.GraphObject.build('PanelExpanderButton', {
+                  row: 2,
+                  alignment: go.Spot.Right
+                }, 'Inherited')
+                  .bind('visible', 'inheritedItems', (arr) => Array.isArray(arr) && arr.length > 0)
+                  .theme('ButtonIcon.stroke', 'text'),
+                new go.Panel('Vertical', {
+                  row: 3,
+                  name: 'Inherited',
+                  alignment: go.Spot.TopLeft,
+                  defaultAlignment: go.Spot.Left,
+                  itemTemplate: itemTempl
+                })
+                  .bind('itemArray', 'inheritedItems')
+              )
+          )
+      );
+
+    // define the Link template, representing a relationship
+    myDiagram.linkTemplate = new go.Link({ // the whole link panel
+      selectionAdorned: true,
+      layerName: 'Background',
+      reshapable: true,
+      routing: go.Routing.AvoidsNodes,
+      corner: 5,
+      curve: go.Curve.JumpOver
+    })
+      .add(
+        new go.Shape({ // the link shape
+          stroke: '#f7f9fc',
+          strokeWidth: 3
+        })
+          .theme('stroke', 'link'),
+        new go.TextBlock({ // the "from" label
+          textAlign: 'center',
+          font: 'bold 14px sans-serif',
+          stroke: 'black',
+          segmentIndex: 0,
+          segmentOffset: new go.Point(NaN, NaN),
+          segmentOrientation: go.Orientation.Upright
+        })
+          .bind('text')
+          .theme('stroke', 'text'),
+        new go.TextBlock({ // the "to" label
+          textAlign: 'center',
+          font: 'bold 14px sans-serif',
+          stroke: 'black',
+          segmentIndex: -1,
+          segmentOffset: new go.Point(NaN, NaN),
+          segmentOrientation: go.Orientation.Upright
+        })
+          .bind('text', 'toText')
+          .theme('stroke', 'text')
+        );
+
+    // create the model for the E-R diagram
+    const nodeDataArray = [
+      {
+        key: 'Books',
+        location: new go.Point(250, 250),
+        items: [
+          { name: 'book_id', iskey: true, figure: 'Decision', color: 'purple' },
+          { name: 'isbn', iskey: false, figure: 'Hexagon', color: 'blue' },
+          { name: 'title', iskey: false, figure: 'Hexagon', color: 'blue' },
+          { name: 'publisher_id', iskey: false, figure: 'Hexagon', color: 'blue' },
+          { name: 'format', iskey: false, figure: 'Hexagon', color: 'blue' },
+          { name: 'pages', iskey: false, figure: 'Hexagon', color: 'blue' },
+          { name: 'published', iskey: false, figure: 'Hexagon', color: 'blue' },
+          { name: 'year', iskey: false, figure: 'Hexagon', color: 'blue' }
+        ],
+        inheritedItems: [
+          { name: 'published_id', iskey: false, figure: 'Decision', color: 'green' }
+        ]
+      },
+      {
+        key: 'Authored',
+        location: new go.Point(500, 0),
+        items: [
+          
+      ],
+        inheritedItems: [
+          { name: 'author_id', iskey: true, figure: 'Hexagon', color: 'green' },
+          { name: 'book_id', iskey: false, figure: 'Hexagon', color: 'green' }
+        ]
+      },
+      {
+        key: 'Authors',
+        location: new go.Point(0, 30),
+        items: [
+          { name: 'author_id', iskey: true, figure: 'Decision', color: 'purple' },
+          { name: 'name', iskey: false, figure: 'Hexagon', color: 'blue' },
+          { name: 'country', iskey: false, figure: 'Hexagon', color: 'blue' },
+          { name: 'birth', iskey: false, figure: 'Hexagon', color: 'blue' }
+        ],
+      }
+    ];
+    const linkDataArray = [
+      { from: 'Books', to: 'Authored', text: 'N', toText: 'N' },
+      { from: 'Authored', to: 'Authors', text: 'N', toText: 'N' }
+    ];
+    myDiagram.model = new go.GraphLinksModel({
+      copiesArrays: true,
+      copiesArrayObjects: true,
+      nodeDataArray: nodeDataArray,
+      linkDataArray: linkDataArray
+    });
+  }
+
+  const changeTheme = () => {
+    const myDiagram = go.Diagram.fromDiv('myDiagramDiv');
+    if (myDiagram) {
+      myDiagram.themeManager.currentTheme = document.getElementById('theme').value;
+    }
+  };
+
+  window.addEventListener('DOMContentLoaded', init);
+</script>
+<div id="sample">
+  <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; width: 100%; height: 700px"></div>
+  Theme:
+  <select id="theme" onchange="changeTheme()">
+    <option value="system">System</option>
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+  </select>
+</div>
+</div>
+</body>
+</html>
