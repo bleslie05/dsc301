@@ -1,0 +1,20 @@
+-- Create Employees Table
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    department VARCHAR(50),
+    email VARCHAR(100),
+    phone_number VARCHAR(20),
+    salary DECIMAL(10,2)
+);
+
+
+INSERT OR IGNORE INTO Employees (emp_id, first_name, last_name, department, email, phone_number, salary) 
+VALUES
+(1, 'Alice', 'Johnson', 'HR', 'alice.j@company.com', '123-456-7890', 60000),
+(2, 'Bob', 'Smith', 'IT', 'bob.s@company.com', '987-654-3210', 70000),
+(3, 'Charlie', 'Brown', 'Finance', 'charlie.b@company.com', '456-789-1234', 80000),
+(4, 'David', 'Wilson', 'IT', 'david.w@company.com', '654-321-9876', 65000),
+(5, 'Emma', 'Davis', 'Marketing', 'emma.d@company.com', '321-654-7890', 75000),
+(6, 'Frank', 'Miller', 'HR', 'frank.m@company.com', '789-123-4567', 72000);
