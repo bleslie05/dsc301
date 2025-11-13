@@ -8,7 +8,7 @@
 
 ---
 
-## 📘 Overview  
+## Overview  
 
 This repository contains assignments, database files, and instructor-provided examples from **DSC-301: Databases and SQL for Data Science**.  
 All **assignments (AS)**, **homework (HW)**, and **reports** are original student work.  
@@ -18,7 +18,7 @@ The course focused on relational database design, SQL querying, and database int
 
 ---
 
-## 🧩 Repository Contents  
+## Repository Contents  
 
 | File | Description | Authorship |
 |------|--------------|-------------|
@@ -42,7 +42,7 @@ The course focused on relational database design, SQL querying, and database int
 
 ---
 
-## 🧠 Topics Covered  
+## Topics Covered  
 
 - **Database Design:** normalization, keys, schema creation  
 - **SQL Querying:** `SELECT`, `JOIN`, `GROUP BY`, `HAVING`, `ORDER BY`  
@@ -55,7 +55,7 @@ The course focused on relational database design, SQL querying, and database int
 
 ---
 
-## ⚙️ Tools and Packages  
+## Tools and Packages  
 
 - **SQL Engine:** SQLite 3  
 - **R Packages:** `DBI`, `RSQLite`, `dplyr`, `readr`, `glue`  
@@ -64,7 +64,7 @@ The course focused on relational database design, SQL querying, and database int
 
 ---
 
-## 🧾 Academic Integrity Notice  
+## Academic Integrity Notice  
 
 This repository includes both **student-authored coursework** and **instructor-provided reference materials** from the UNE DSC-301 course.  
 All files are shared solely for **educational and portfolio purposes**.  
@@ -72,7 +72,7 @@ Instructor materials may not be redistributed or submitted as original work.
 
 ---
 
-## 📈 Skills Demonstrated  
+## Skills Demonstrated  
 
 - Database schema creation and relational modeling  
 - Writing multi-table SQL queries and subqueries  
@@ -84,7 +84,7 @@ Instructor materials may not be redistributed or submitted as original work.
 
 ---
 
-## 🌐 Contact  
+## Contact  
 
 **Brandon Leslie**  
 University of New England — Data Science Major  
